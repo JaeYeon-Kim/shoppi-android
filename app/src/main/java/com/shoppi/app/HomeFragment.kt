@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 class HomeFragment: Fragment() {
     override fun onCreateView(
@@ -22,10 +23,8 @@ class HomeFragment: Fragment() {
 
         val button = view.findViewById<Button>(R.id.btn_enter_product_detail)
         button.setOnClickListener {
-            // HostFragment이므로 parentFragmentManager임.
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.add(R.id.container_main,  ProductDetailFragment())
-            transaction.commit()            // transaction 실행
+           // navigation으로 버튼 클릭시 화면 이동 구현, navigate 메소드로 화면 이동 구현
+           findNavController().navigate(R.id.action_home_to_product_detail)
         }
     }
 }
