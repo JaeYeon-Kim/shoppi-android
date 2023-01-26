@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import org.json.JSONObject
 
@@ -58,6 +59,27 @@ class HomeFragment: Fragment() {
                 // 배너의 리스트를 전달
                 submitList(homeData.topBanners)
             }
+
+            // dp값을 pixel단위로 변경하는 작업 필요 -> 안드로이드 시스템에서 제공하는 메소드 사용
+            val pageWidth = resources.getDimension(R.dimen.viewpager_item_width)
+            val pageMargin = resources.getDimension(R.dimen.viewpager_item_margin)
+            // 디바이스의 가로길이 구하기
+            val screenWidth = resources.displayMetrics.widthPixels
+            val offset = screenWidth - pageWidth - pageMargin
+
+            viewpager.offscreenPageLimit = 3
+
+            // 뷰페이저 애니메이션 구현
+            // SAM 형식의 메서드는 람다 형식으로 구현이 가능 하기 때문에 람다식으로 변경
+            viewpager.setPageTransformer { page, position ->
+                page.translationX = position * -offset          // position에 offset을 곱한만큼 적용
+            }
+
+            // 인디케이터 구현
+            TabLayoutMediator(viewpagerIndicator, viewpager) { tab, position ->
+
+            }.attach()          // 뷰페이저의 페이지가 변경되었을때 탭 레이아웃의 인디케이터도 변경된다.
+
 
         }
     }
