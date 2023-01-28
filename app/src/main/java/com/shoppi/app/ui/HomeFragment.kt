@@ -1,21 +1,22 @@
-package com.shoppi.app
+package com.shoppi.app.ui
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
-import org.json.JSONObject
+import com.shoppi.app.AssetLoader
+import com.shoppi.app.GlideApp
+import com.shoppi.app.HomeBannerAdapter
+import com.shoppi.app.HomeData
+import com.shoppi.app.R
 
 class HomeFragment: Fragment() {
     override fun onCreateView(
